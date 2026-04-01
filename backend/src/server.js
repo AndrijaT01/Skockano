@@ -126,6 +126,16 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.json({
+    status: 'ok',
+    message: 'Čisto backend radi',
+    endpoints: {
+      health: '/api/health',
+      ready: '/api/ready',
+    },
+  });
+});
 app.get('/api/health', async (req, res) => {
   const dbFile = path.join(__dirname, '../../data/db.json');
   const hasDbFile = fs.existsSync(dbFile);
