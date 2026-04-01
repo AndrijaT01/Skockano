@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  app:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      NODE_ENV: production
+      APP_NAME: Čisto
+      JWT_SECRET: promeni-ovaj-jwt-kljuc
+      DATA_MODE: postgres
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/cisto
+      DATABASE_SSL: "false"
+      PAYMENT_MODE: simulation
+      STRIPE_PUBLIC_KEY: pk_test_example
+      STRIPE_SECRET_KEY: sk_test_example
+    volumes:
+      - ./frontend:/app/frontend
+      - ./data:/app/data
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cisto
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./deploy/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  postgres_data:

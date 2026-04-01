@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1769ff" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+  <title>Čisto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">Č</div>
+        <div>
+          <div class="brand-title">Čisto</div>
+          <div class="brand-sub">Čišćenje na klik</div>
+        </div>
+      </div>
+      <nav id="sidebar-nav" class="sidebar-nav"></nav>
+      <div class="sidebar-footer">
+        <div class="mini-card">
+          <strong>Test nalozi</strong>
+          <span>milan@test.com</span>
+          <span>marija@test.com</span>
+          <span>admin@test.com</span>
+          <span>lozinka123 / admin123</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <h1 id="page-title">Dobrodošao</h1>
+          <p id="page-subtitle">Povezano sa backendom i spremno za testiranje.</p>
+        </div>
+        <div class="topbar-actions">
+          <div id="api-pill" class="api-pill">API proveravam…</div>
+          <button id="logout-btn" class="ghost-btn hidden">Odjava</button>
+        </div>
+      </header>
+
+      <section id="auth-view" class="view active"></section>
+      <section id="dashboard-view" class="view"></section>
+      <section id="providers-view" class="view"></section>
+      <section id="provider-view" class="view"></section>
+      <section id="bookings-view" class="view"></section>
+      <section id="messages-view" class="view"></section>
+      <section id="profile-view" class="view"></section>
+      <section id="admin-view" class="view"></section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./assets/app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+      }
+    </script>
+  </body>
+</html>

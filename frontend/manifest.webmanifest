@@ -1,0 +1,10 @@
+{
+  "name": "Čisto",
+  "short_name": "Čisto",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#1769ff",
+  "description": "Platforma za rezervaciju usluga čišćenja.",
+  "icons": []
+}

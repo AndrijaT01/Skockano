@@ -1,0 +1,452 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "name": "Milan Nikolić",
+      "email": "milan@test.com",
+      "password": "$2a$10$GSZ2ceyDbZxw1j/eu1oeJ.FbrfnQImrVLi588wglRq5uztb3uD/R2",
+      "role": "client",
+      "location": "Zemun",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "u2",
+      "name": "Marija Jovanović",
+      "email": "marija@test.com",
+      "password": "$2a$10$GSZ2ceyDbZxw1j/eu1oeJ.FbrfnQImrVLi588wglRq5uztb3uD/R2",
+      "role": "provider",
+      "location": "Novi Beograd",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "u3",
+      "name": "Dragan Simić",
+      "email": "dragan@test.com",
+      "password": "$2a$10$GSZ2ceyDbZxw1j/eu1oeJ.FbrfnQImrVLi588wglRq5uztb3uD/R2",
+      "role": "provider",
+      "location": "Zemun",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "u4",
+      "name": "Ana Petrović",
+      "email": "ana@test.com",
+      "password": "$2a$10$GSZ2ceyDbZxw1j/eu1oeJ.FbrfnQImrVLi588wglRq5uztb3uD/R2",
+      "role": "provider",
+      "location": "Vračar",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "u5",
+      "name": "Nikoleta Kovač",
+      "email": "nikoleta@test.com",
+      "password": "$2a$10$GSZ2ceyDbZxw1j/eu1oeJ.FbrfnQImrVLi588wglRq5uztb3uD/R2",
+      "role": "provider",
+      "location": "Palilula",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "u6",
+      "name": "Admin Čisto",
+      "email": "admin@test.com",
+      "password": "$2a$10$0vQlfYvZXBseztgFxlEfS.pDMwcSK.eIz5jcjMR6lWhycGomqTE6C",
+      "role": "admin",
+      "location": "Beograd",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    }
+  ],
+  "providers": [
+    {
+      "id": "p3",
+      "userId": "u4",
+      "name": "Ana Petrović",
+      "initials": "AP",
+      "location": "Vračar",
+      "rating": 4.7,
+      "reviewCount": 32,
+      "pricePerHour": 1500,
+      "verified": false,
+      "online": false,
+      "bio": "Specijalizovana za pranje prozora i čišćenje tepiha. Vlastita profesionalna oprema za dubinsko usisavanje.",
+      "services": [
+        "Prozori",
+        "Tepisi",
+        "Čišćenje stana"
+      ],
+      "color": "#FAECE7",
+      "textColor": "#4A1B0C",
+      "avatarUrl": "",
+      "gallery": [],
+      "availableDates": [
+        3,
+        5,
+        6,
+        9,
+        10,
+        13,
+        17,
+        18,
+        20,
+        24,
+        27,
+        28
+      ],
+      "stats": {
+        "jobs": 89,
+        "rating": 4.7,
+        "reviews": 32,
+        "response": 91
+      },
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "p2",
+      "userId": "u3",
+      "name": "Dragan Simić",
+      "initials": "DS",
+      "location": "Zemun",
+      "rating": 5,
+      "reviewCount": 51,
+      "pricePerHour": 2500,
+      "verified": true,
+      "online": false,
+      "bio": "Profesionalna ekipa za dubinsko čišćenje poslovnih prostora i stanova posle renovacije. Radimo i vikendom.",
+      "services": [
+        "Poslovni prostori",
+        "Posle gradnje",
+        "Dubinsko čišćenje"
+      ],
+      "color": "#FAEEDA",
+      "textColor": "#854F0B",
+      "avatarUrl": "",
+      "gallery": [],
+      "availableDates": [
+        1,
+        4,
+        7,
+        8,
+        11,
+        14,
+        15,
+        18,
+        21,
+        22,
+        25,
+        28,
+        29
+      ],
+      "stats": {
+        "jobs": 198,
+        "rating": 5,
+        "reviews": 51,
+        "response": 95
+      },
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "p1",
+      "userId": "u2",
+      "name": "Marija Jovanović",
+      "initials": "MJ",
+      "location": "Novi Beograd",
+      "rating": 4.9,
+      "reviewCount": 84,
+      "pricePerHour": 1800,
+      "verified": true,
+      "online": true,
+      "bio": "Iskusna domaćica sa 8+ godina iskustva. Specijalizovana za redovno i generalno čišćenje stanova i kuća. Tačna, uredna i pouzdana.",
+      "services": [
+        "Čišćenje stana",
+        "Peglanje",
+        "Organizacija",
+        "Prozori"
+      ],
+      "color": "#E1F5EE",
+      "textColor": "#085041",
+      "avatarUrl": "",
+      "gallery": [],
+      "availableDates": [
+        2,
+        3,
+        5,
+        8,
+        9,
+        11,
+        12,
+        16,
+        17,
+        18,
+        22,
+        23,
+        25,
+        26,
+        29,
+        30
+      ],
+      "stats": {
+        "jobs": 312,
+        "rating": 4.9,
+        "reviews": 84,
+        "response": 98
+      },
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "p4",
+      "userId": "u5",
+      "name": "Nikoleta Kovač",
+      "initials": "NK",
+      "location": "Palilula",
+      "rating": 4.8,
+      "reviewCount": 40,
+      "pricePerHour": 1600,
+      "verified": true,
+      "online": true,
+      "bio": "Brza, pouzdana, preporučena od strane 40+ zadovoljnih klijenata. Fleksibilni termini uključujući vikende.",
+      "services": [
+        "Čišćenje stana",
+        "Dubinsko čišćenje",
+        "Peglanje"
+      ],
+      "color": "#EEEDFE",
+      "textColor": "#3C3489",
+      "avatarUrl": "",
+      "gallery": [],
+      "availableDates": [
+        1,
+        2,
+        4,
+        5,
+        8,
+        9,
+        12,
+        15,
+        16,
+        19,
+        22,
+        23,
+        26,
+        29,
+        30
+      ],
+      "stats": {
+        "jobs": 145,
+        "rating": 4.8,
+        "reviews": 40,
+        "response": 97
+      },
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "b1",
+      "clientId": "u1",
+      "providerId": "p1",
+      "service": "regular",
+      "serviceName": "Redovno čišćenje",
+      "date": "2026-04-26",
+      "time": "10:00",
+      "price": 3600,
+      "commission": 360,
+      "providerAmount": 3240,
+      "status": "confirmed",
+      "paymentMethod": "card",
+      "paymentStatus": "paid",
+      "notes": null,
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "m1",
+      "conversationId": "c1",
+      "from": "provider",
+      "text": "Zdravo! Videla sam da ste zakazali redovno čišćenje za sutra. 🙂",
+      "time": "16:20",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "m2",
+      "conversationId": "c1",
+      "from": "client",
+      "text": "Da, tačno! Imam dvosoban stan, oko 55m².",
+      "time": "16:22",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "m3",
+      "conversationId": "c1",
+      "from": "provider",
+      "text": "Odlično! Hoćete li i frižider iznutra?",
+      "time": "16:23",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "m4",
+      "conversationId": "c1",
+      "from": "client",
+      "text": "Da, molim vas! I mikrotalasna ako ima vremena.",
+      "time": "16:25",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "m5",
+      "conversationId": "c1",
+      "from": "provider",
+      "text": "Vidimo se sutra u 10! 🙂",
+      "time": "9:38",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "m6",
+      "conversationId": "c2",
+      "from": "client",
+      "text": "Dragan, posao je bio odlično urađen. Ostavljam 5 zvezdica!",
+      "time": "18:10",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "m7",
+      "conversationId": "c2",
+      "from": "provider",
+      "text": "Hvala na recenziji, drago mi je! Uvek smo na usluzi. 🤝",
+      "time": "19:45",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "m8",
+      "conversationId": "c3",
+      "from": "client",
+      "text": "Ana, da li ste slobodni u sredu?",
+      "time": "10:00",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    },
+    {
+      "id": "m9",
+      "conversationId": "c3",
+      "from": "provider",
+      "text": "Da, mogu u sredu posle 14h",
+      "time": "10:15",
+      "createdAt": "2026-03-30T23:16:03.101Z"
+    }
+  ],
+  "conversations": [
+    {
+      "id": "c1",
+      "clientId": "u1",
+      "providerId": "p1",
+      "lastMessage": "Vidimo se sutra u 10! 🙂",
+      "lastTime": "9:38",
+      "unread": 2,
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "c2",
+      "clientId": "u1",
+      "providerId": "p2",
+      "lastMessage": "Hvala na recenziji, drago mi je!",
+      "lastTime": "Juče",
+      "unread": 0,
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "c3",
+      "clientId": "u1",
+      "providerId": "p3",
+      "lastMessage": "Da, mogu u sredu posle 14h",
+      "lastTime": "Pon",
+      "unread": 0,
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "r1",
+      "providerId": "p1",
+      "clientId": null,
+      "clientName": "Jovana M.",
+      "initials": "JM",
+      "rating": 5,
+      "text": "Marija je odradila generalno čišćenje za 4 sata. Stan je blistao! Tačna, ljubazna i veoma temeljita.",
+      "tip": 0,
+      "date": "2025-03-18T00:00:00.000+01:00",
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "r2",
+      "providerId": "p1",
+      "clientId": null,
+      "clientName": "Branko T.",
+      "initials": "BT",
+      "rating": 5,
+      "text": "Odlična i profesionalna. Sve po dogovoru, bez ikakvih iznenadjenja. Preporučujem svima!",
+      "tip": 0,
+      "date": "2025-03-05T00:00:00.000+01:00",
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "r3",
+      "providerId": "p2",
+      "clientId": null,
+      "clientName": "Stefan M.",
+      "initials": "SM",
+      "rating": 5,
+      "text": "Dragan i ekipa su očistili lokal posle renovacije. Profesionalno, brzo i po dogovorenoj ceni.",
+      "tip": 0,
+      "date": "2025-03-20T00:00:00.000+01:00",
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "r4",
+      "providerId": "p3",
+      "clientId": null,
+      "clientName": "Milena R.",
+      "initials": "MR",
+      "rating": 5,
+      "text": "Ana je operala sve prozore u stanu, sjaje se kao ogledalo. Brza i efikasna!",
+      "tip": 0,
+      "date": "2025-03-12T00:00:00.000+01:00",
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    },
+    {
+      "id": "r5",
+      "providerId": "p4",
+      "clientId": null,
+      "clientName": "Dragana P.",
+      "initials": "DP",
+      "rating": 5,
+      "text": "Nikoleta je super! Uvek tačna i temeljita. Koristim je svake dve nedelje.",
+      "tip": 0,
+      "date": "2025-03-25T00:00:00.000+01:00",
+      "createdAt": "2026-03-31T16:55:17.303Z"
+    }
+  ],
+  "payments": [
+    {
+      "id": "498c21ba-3a74-416a-9d9a-5f8a37db5d87",
+      "bookingId": "b1",
+      "clientId": "u1",
+      "providerId": "p1",
+      "amount": 3600,
+      "method": "card",
+      "status": "paid",
+      "reference": "PAY-1775065095665",
+      "createdAt": "2026-04-01T17:38:15.666Z"
+    }
+  ],
+  "settings": {
+    "deployTarget": "local",
+    "lastBackupAt": null,
+    "platformName": "Čisto",
+    "supportEmail": "podrska@cisto.test",
+    "defaultCurrency": "RSD",
+    "maintenanceMode": false,
+    "allowNewProviders": true,
+    "bookingFeePercent": 10,
+    "featuredProviderIds": [
+      "p1",
+      "p4"
+    ]
+  }
+}

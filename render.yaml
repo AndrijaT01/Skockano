@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: cisto-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run start
+    healthCheckPath: /api/ready
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_MODE
+        value: postgres
+      - key: DATABASE_SSL
+        value: "true"
+      - key: TRUST_PROXY
+        value: "true"
+      - key: LOG_LEVEL
+        value: info
+      - key: STORAGE_MODE
+        value: cloudinary
+      - key: PAYMENT_MODE
+        value: stripe
