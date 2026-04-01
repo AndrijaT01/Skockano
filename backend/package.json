@@ -1,0 +1,29 @@
+{
+  "name": "cisto-backend",
+  "version": "1.5.0",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "start:prod": "NODE_ENV=production node src/server.js",
+    "start:render": "node src/server.js",
+    "start:railway": "node src/server.js",
+    "smoke": "node -e \"fetch(`http://localhost:${process.env.PORT||3001}/api/ready`).then(r=>r.text()).then(t=>{console.log(t);process.exit(0)}).catch(e=>{console.error(e);process.exit(1)})\""
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.0",
+    "socket.io": "^4.7.2",
+    "pg": "^8.12.0",
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
