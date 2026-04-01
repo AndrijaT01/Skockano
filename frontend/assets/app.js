@@ -1,4 +1,12 @@
-const API = '/api';
+const API_BASE_URL =
+  window.location.hostname === 'localhost'
+    ? 'http://localhost:3001'
+    : 'https://skockano-backend.onrender.com';
+
+const API = `${API_BASE_URL}/api`;
+// const API_BASE_URL = 'https://skockano-backend.onrender.com';
+// const API = `${API_BASE_URL}/api`;
+//const API = '/api';
 const SERVICES = [
   { id: 'regular', name: 'Redovno čišćenje', duration: '2–3 sata', price: 3600 },
   { id: 'general', name: 'Generalno čišćenje', duration: '4–6 sati', price: 7200 },
