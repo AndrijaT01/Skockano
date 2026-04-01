@@ -291,7 +291,7 @@ function hydrateBooking(booking) {
   return { ...booking, provider, client: getSafeUser(client), payment };
 }
 
-function persistAndSend(res, payload, code=200) {
+function persistAndSend(res, payload, code = 200) {
   saveDb();
   return res.status(code).json(payload);
 }
@@ -436,11 +436,11 @@ router.get('/providers', async (req, res) => {
   if (online === 'true') list = list.filter(p => p.online);
   if (service) list = list.filter(p => (p.services || []).map(s => s.toLowerCase()).includes(String(service).toLowerCase()));
   const sorter = String(sort || '');
-  if (sorter === 'price_asc') list.sort((a,b)=>a.pricePerHour-b.pricePerHour || b.rating-a.rating);
-  else if (sorter === 'price_desc') list.sort((a,b)=>b.pricePerHour-a.pricePerHour || b.rating-a.rating);
-  else if (sorter === 'reviews_desc') list.sort((a,b)=>b.reviewCount-a.reviewCount || b.rating-a.rating);
-  else if (sorter === 'name_asc') list.sort((a,b)=>String(a.name).localeCompare(String(b.name)));
-  else list.sort((a,b)=>Number(b.verified)-Number(a.verified) || Number(b.online)-Number(a.online) || b.rating-a.rating || String(a.name).localeCompare(String(b.name)));
+  if (sorter === 'price_asc') list.sort((a, b) => a.pricePerHour - b.pricePerHour || b.rating - a.rating);
+  else if (sorter === 'price_desc') list.sort((a, b) => b.pricePerHour - a.pricePerHour || b.rating - a.rating);
+  else if (sorter === 'reviews_desc') list.sort((a, b) => b.reviewCount - a.reviewCount || b.rating - a.rating);
+  else if (sorter === 'name_asc') list.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+  else list.sort((a, b) => Number(b.verified) - Number(a.verified) || Number(b.online) - Number(a.online) || b.rating - a.rating || String(a.name).localeCompare(String(b.name)));
   const total = list.length;
   const items = list.slice(pagination.offset, pagination.offset + pagination.limit);
   res.json(wrapListResponse(req, items, {
@@ -540,7 +540,7 @@ router.patch('/provider/me', authMiddleware, writeLimiter, validateProviderUpdat
       `UPDATE providers
        SET bio = $1, price_per_hour = $2, location = $3, online = $4, initials = $5
        WHERE id = $6`,
-      [nextBio, nextPrice, nextLocation, nextOnline, provider.name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase(), provider.id]
+      [nextBio, nextPrice, nextLocation, nextOnline, provider.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase(), provider.id]
     );
     await pg.query('UPDATE users SET location = $1 WHERE id = $2', [nextLocation, req.user.id]);
     await pg.query('DELETE FROM provider_services WHERE provider_id = $1', [provider.id]);
@@ -558,7 +558,7 @@ router.patch('/provider/me', authMiddleware, writeLimiter, validateProviderUpdat
   if (pricePerHour !== undefined) provider.pricePerHour = Number(pricePerHour) || provider.pricePerHour;
   if (Array.isArray(services)) provider.services = services.map(item => String(item).trim()).filter(Boolean).slice(0, 8);
   if (typeof online === 'boolean') provider.online = online;
-  provider.initials = provider.name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase();
+  provider.initials = provider.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
   return persistAndSend(res, enrichProvider(provider));
 });
 
@@ -656,12 +656,12 @@ router.get('/bookings/my', authMiddleware, async (req, res) => {
     bookings = bookings.filter(b => String(b.serviceName || b.service).toLowerCase().includes(q) || String(b.notes || '').toLowerCase().includes(q));
   }
   const sorter = String(sort || '');
-  if (sorter === 'oldest') bookings.sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt));
-  else if (sorter === 'date_asc') bookings.sort((a,b)=>`${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
-  else if (sorter === 'date_desc') bookings.sort((a,b)=>`${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`));
-  else if (sorter === 'price_desc') bookings.sort((a,b)=>b.price-a.price || new Date(b.createdAt)-new Date(a.createdAt));
-  else if (sorter === 'price_asc') bookings.sort((a,b)=>a.price-b.price || new Date(b.createdAt)-new Date(a.createdAt));
-  else bookings.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+  if (sorter === 'oldest') bookings.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  else if (sorter === 'date_asc') bookings.sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
+  else if (sorter === 'date_desc') bookings.sort((a, b) => `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`));
+  else if (sorter === 'price_desc') bookings.sort((a, b) => b.price - a.price || new Date(b.createdAt) - new Date(a.createdAt));
+  else if (sorter === 'price_asc') bookings.sort((a, b) => a.price - b.price || new Date(b.createdAt) - new Date(a.createdAt));
+  else bookings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   const total = bookings.length;
   const items = bookings.slice(pagination.offset, pagination.offset + pagination.limit);
   res.json(wrapListResponse(req, items, { ...pagination, total, totalPages: Math.max(1, Math.ceil(total / pagination.limit)), sort: sorter || 'newest' }));
@@ -684,7 +684,7 @@ router.post('/bookings', authMiddleware, writeLimiter, validateBookingCreate, as
        (id, client_id, provider_id, service, service_name, booking_date, booking_time, price, commission, provider_amount, status, payment_method, payment_status, notes, created_at)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'confirmed',$11,$12,$13,NOW())
        RETURNING id`,
-      [bookingId, req.user.id, providerId, service, serviceName || null, date, time, Number(price), commission, Number(price)-commission, paymentMethod, paymentMethod === 'card' ? 'paid' : 'pending', note || '']
+      [bookingId, req.user.id, providerId, service, serviceName || null, date, time, Number(price), commission, Number(price) - commission, paymentMethod, paymentMethod === 'card' ? 'paid' : 'pending', note || '']
     );
 
     if (paymentMethod === 'card') {
@@ -697,7 +697,7 @@ router.post('/bookings', authMiddleware, writeLimiter, validateBookingCreate, as
     }
 
     let conv = await queryOne('SELECT * FROM conversations WHERE client_id = $1 AND provider_id = $2 LIMIT 1', [req.user.id, providerId]);
-    const nowTime = new Date().toLocaleTimeString('sr-RS', { hour:'2-digit', minute:'2-digit' });
+    const nowTime = new Date().toLocaleTimeString('sr-RS', { hour: '2-digit', minute: '2-digit' });
     if (!conv) {
       conv = await queryOne(
         `INSERT INTO conversations (id, client_id, provider_id, last_message, last_time, unread, created_at)
@@ -722,17 +722,17 @@ router.post('/bookings', authMiddleware, writeLimiter, validateBookingCreate, as
   if (!provider) return res.status(404).json({ error: 'Pružalac nije pronađen' });
   const commissionRate = Number(db.settings?.bookingFeePercent || 10) / 100;
   const commission = Math.round(Number(price) * commissionRate);
-  const booking = { id: uuidv4(), clientId: req.user.id, providerId, service, serviceName, date, time, price: Number(price), commission, providerAmount: Number(price)-commission, note: note || '', status: 'confirmed', paymentMethod, paymentStatus: paymentMethod === 'card' ? 'paid' : 'pending', createdAt: new Date() };
+  const booking = { id: uuidv4(), clientId: req.user.id, providerId, service, serviceName, date, time, price: Number(price), commission, providerAmount: Number(price) - commission, note: note || '', status: 'confirmed', paymentMethod, paymentStatus: paymentMethod === 'card' ? 'paid' : 'pending', createdAt: new Date() };
   db.bookings.push(booking);
   if (paymentMethod === 'card') {
     db.payments.push({ id: uuidv4(), bookingId: booking.id, clientId: req.user.id, providerId, amount: Number(price), method: 'card', status: 'paid', reference: `PAY-${Date.now()}`, createdAt: new Date() });
   }
   let conv = db.conversations.find(c => c.clientId === req.user.id && c.providerId === providerId);
   if (!conv) {
-    conv = { id: uuidv4(), clientId: req.user.id, providerId, lastMessage: 'Nova rezervacija je poslata.', lastTime: new Date().toLocaleTimeString('sr-RS', { hour:'2-digit', minute:'2-digit' }), unread: 0 };
+    conv = { id: uuidv4(), clientId: req.user.id, providerId, lastMessage: 'Nova rezervacija je poslata.', lastTime: new Date().toLocaleTimeString('sr-RS', { hour: '2-digit', minute: '2-digit' }), unread: 0 };
     db.conversations.push(conv);
   }
-  const autoMsg = { id: uuidv4(), conversationId: conv.id, from: 'system', text: `Rezervacija potvrđena za ${date} u ${time} — ${serviceName || service}.`, time: new Date().toLocaleTimeString('sr-RS', { hour:'2-digit', minute:'2-digit' }), createdAt: new Date() };
+  const autoMsg = { id: uuidv4(), conversationId: conv.id, from: 'system', text: `Rezervacija potvrđena za ${date} u ${time} — ${serviceName || service}.`, time: new Date().toLocaleTimeString('sr-RS', { hour: '2-digit', minute: '2-digit' }), createdAt: new Date() };
   db.messages.push(autoMsg); conv.lastMessage = autoMsg.text; conv.lastTime = autoMsg.time;
   return persistAndSend(res, hydrateBooking(booking), 201);
 });
@@ -849,9 +849,9 @@ router.get('/payments/my', authMiddleware, async (req, res) => {
   if (status) payments = payments.filter(p => p.status === status);
   if (method) payments = payments.filter(p => p.method === method);
   const sorter = String(sort || '');
-  if (sorter === 'amount_asc') payments.sort((a,b)=>a.amount-b.amount || new Date(b.createdAt)-new Date(a.createdAt));
-  else if (sorter === 'amount_desc') payments.sort((a,b)=>b.amount-a.amount || new Date(b.createdAt)-new Date(a.createdAt));
-  else payments.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+  if (sorter === 'amount_asc') payments.sort((a, b) => a.amount - b.amount || new Date(b.createdAt) - new Date(a.createdAt));
+  else if (sorter === 'amount_desc') payments.sort((a, b) => b.amount - a.amount || new Date(b.createdAt) - new Date(a.createdAt));
+  else payments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   const total = payments.length;
   const items = payments.slice(pagination.offset, pagination.offset + pagination.limit);
   res.json(wrapListResponse(req, items, { ...pagination, total, totalPages: Math.max(1, Math.ceil(total / pagination.limit)), sort: sorter || 'newest' }));
@@ -876,7 +876,7 @@ router.get('/conversations/all', authMiddleware, async (req, res) => {
   }
   const providerProfile = getProviderByUserId(req.user.id);
   const providerId = providerProfile?.id;
-  let convs = db.conversations.filter(c => c.clientId === req.user.id || c.providerId === providerId).map(c => ({ ...c, provider: db.providers.find(p => p.id === c.providerId) || null, client: getSafeUser(db.users.find(u => u.id === c.clientId) || null) })).sort((a,b)=>String(b.lastTime).localeCompare(String(a.lastTime)));
+  let convs = db.conversations.filter(c => c.clientId === req.user.id || c.providerId === providerId).map(c => ({ ...c, provider: db.providers.find(p => p.id === c.providerId) || null, client: getSafeUser(db.users.find(u => u.id === c.clientId) || null) })).sort((a, b) => String(b.lastTime).localeCompare(String(a.lastTime)));
   if (search) {
     const q = String(search).toLowerCase();
     convs = convs.filter(c => String(c.lastMessage || '').toLowerCase().includes(q) || String(c.provider?.name || '').toLowerCase().includes(q));
@@ -903,7 +903,7 @@ router.get('/messages/:conversationId', authMiddleware, async (req, res) => {
   const providerProfile = getProviderByUserId(req.user.id);
   const hasAccess = conv.clientId === req.user.id || conv.providerId === providerProfile?.id;
   if (!hasAccess) return res.status(403).json({ error: 'Nemate pristup ovom razgovoru' });
-  const msgs = db.messages.filter(m => m.conversationId === req.params.conversationId).sort((a,b)=>new Date(a.createdAt||0)-new Date(b.createdAt||0));
+  const msgs = db.messages.filter(m => m.conversationId === req.params.conversationId).sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
   const total = msgs.length;
   const items = msgs.slice(pagination.offset, pagination.offset + pagination.limit);
   res.json(wrapListResponse(req, items, { ...pagination, total, totalPages: Math.max(1, Math.ceil(total / pagination.limit)) }));
@@ -920,7 +920,7 @@ router.post('/messages', authMiddleware, writeLimiter, validateMessageCreate, as
     if (!hasAccess) return res.status(403).json({ error: 'Nemate pristup ovom razgovoru' });
     const from = providerProfile?.id === conv.provider_id ? 'provider' : 'client';
     const now = new Date();
-    const time = now.toLocaleTimeString('sr-RS', { hour:'2-digit', minute:'2-digit' });
+    const time = now.toLocaleTimeString('sr-RS', { hour: '2-digit', minute: '2-digit' });
     const row = await queryOne(
       `INSERT INTO messages (id, conversation_id, sender_role, message_text, time_label, created_at)
        VALUES ($1,$2,$3,$4,$5,NOW())
@@ -942,7 +942,7 @@ router.post('/messages', authMiddleware, writeLimiter, validateMessageCreate, as
   if (!hasAccess) return res.status(403).json({ error: 'Nemate pristup ovom razgovoru' });
   const from = providerProfile?.id === conv.providerId ? 'provider' : 'client';
   const now = new Date();
-  const time = now.toLocaleTimeString('sr-RS', { hour:'2-digit', minute:'2-digit' });
+  const time = now.toLocaleTimeString('sr-RS', { hour: '2-digit', minute: '2-digit' });
   const msg = { id: uuidv4(), conversationId, from, text, time, createdAt: now };
   db.messages.push(msg); conv.lastMessage = text; conv.lastTime = time; if (from === 'provider') conv.unread = (conv.unread || 0) + 1;
   return persistAndSend(res, msg, 201);
@@ -957,7 +957,7 @@ router.get('/reviews/provider/:providerId', async (req, res) => {
     const items = rows.map(r => ({ id: r.id, providerId: r.provider_id, clientId: r.client_id, clientName: r.client_name, initials: r.initials, rating: Number(r.rating || 0), text: r.review_text || '', tip: Number(r.tip || 0), date: r.review_date, createdAt: r.created_at }));
     return res.json(wrapListResponse(req, items, { ...pagination, total, totalPages: Math.max(1, Math.ceil(total / pagination.limit)) }));
   }
-  const reviews = db.reviews.filter(r => r.providerId === req.params.providerId).sort((a,b)=>new Date(b.createdAt||0)-new Date(a.createdAt||0));
+  const reviews = db.reviews.filter(r => r.providerId === req.params.providerId).sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
   const total = reviews.length;
   const items = reviews.slice(pagination.offset, pagination.offset + pagination.limit);
   res.json(wrapListResponse(req, items, { ...pagination, total, totalPages: Math.max(1, Math.ceil(total / pagination.limit)) }));
@@ -1016,7 +1016,7 @@ router.post('/reviews', authMiddleware, writeLimiter, validateReviewCreate, asyn
   const provider = db.providers.find(p => p.id === providerId);
   if (provider) {
     const reviews = db.reviews.filter(r => r.providerId === providerId);
-    provider.rating = Math.round((reviews.reduce((sum,item)=>sum+item.rating,0)/reviews.length)*10)/10;
+    provider.rating = Math.round((reviews.reduce((sum, item) => sum + item.rating, 0) / reviews.length) * 10) / 10;
     provider.reviewCount = reviews.length;
     provider.stats.reviews = reviews.length;
     provider.stats.rating = provider.rating;
@@ -1054,8 +1054,8 @@ router.get('/admin/users', authMiddleware, adminOnly, async (req, res) => {
   let users = db.users.map(getSafeUser);
   if (search) { const q = String(search).toLowerCase(); users = users.filter(u => String(u.name).toLowerCase().includes(q) || String(u.email).toLowerCase().includes(q) || String(u.location || '').toLowerCase().includes(q)); }
   if (role) users = users.filter(u => u.role === role);
-  if (String(sort || '') === 'name_asc') users.sort((a,b)=>String(a.name).localeCompare(String(b.name)));
-  else users.sort((a,b)=>new Date(b.createdAt||0)-new Date(a.createdAt||0));
+  if (String(sort || '') === 'name_asc') users.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+  else users.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
   const total = users.length;
   const items = users.slice(pagination.offset, pagination.offset + pagination.limit);
   res.json(wrapListResponse(req, items, { ...pagination, total, totalPages: Math.max(1, Math.ceil(total / pagination.limit)) }));
@@ -1072,10 +1072,10 @@ router.get('/admin/analytics', authMiddleware, adminOnly, async (req, res) => {
     return res.json({ users: usersAgg, providers: { ...providersAgg, avg_rating: Number(providersAgg?.avg_rating || 0) }, bookings: bookingsAgg, payments: { ...paymentsAgg, revenue: Number(paymentsAgg?.revenue || 0) } });
   }
   return res.json({
-    users: { total_users: db.users.length, clients: db.users.filter(u=>u.role==='client').length, providers: db.users.filter(u=>u.role==='provider').length, admins: db.users.filter(u=>u.role==='admin').length },
-    providers: { total_providers: db.providers.length, verified: db.providers.filter(p=>p.verified).length, online: db.providers.filter(p=>p.online).length, avg_rating: db.providers.reduce((s,p)=>s+Number(p.rating||0),0)/(db.providers.length||1) },
-    bookings: { total_bookings: db.bookings.length, confirmed: db.bookings.filter(b=>b.status==='confirmed').length, completed: db.bookings.filter(b=>b.status==='completed').length, reviewed: db.bookings.filter(b=>b.status==='reviewed').length },
-    payments: { revenue: db.payments.reduce((s,p)=>s+Number(p.amount||0),0), total_payments: db.payments.length, paid_payments: db.payments.filter(p=>p.status==='paid').length },
+    users: { total_users: db.users.length, clients: db.users.filter(u => u.role === 'client').length, providers: db.users.filter(u => u.role === 'provider').length, admins: db.users.filter(u => u.role === 'admin').length },
+    providers: { total_providers: db.providers.length, verified: db.providers.filter(p => p.verified).length, online: db.providers.filter(p => p.online).length, avg_rating: db.providers.reduce((s, p) => s + Number(p.rating || 0), 0) / (db.providers.length || 1) },
+    bookings: { total_bookings: db.bookings.length, confirmed: db.bookings.filter(b => b.status === 'confirmed').length, completed: db.bookings.filter(b => b.status === 'completed').length, reviewed: db.bookings.filter(b => b.status === 'reviewed').length },
+    payments: { revenue: db.payments.reduce((s, p) => s + Number(p.amount || 0), 0), total_payments: db.payments.length, paid_payments: db.payments.filter(p => p.status === 'paid').length },
   });
 });
 
@@ -1144,7 +1144,7 @@ router.patch('/admin/providers/:id/verify', authMiddleware, adminOnly, adminLimi
   return persistAndSend(res, enrichProvider(provider));
 });
 router.patch('/admin/users/:id/role', authMiddleware, adminOnly, adminLimiter, async (req, res) => {
-  const allowed = ['client','provider','admin'];
+  const allowed = ['client', 'provider', 'admin'];
   if (!allowed.includes(req.body.role)) return res.status(400).json({ error: 'Nepodržana uloga' });
 
   if (useDirectPg()) {

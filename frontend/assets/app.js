@@ -140,7 +140,7 @@ async function api(path, method='GET', body, options = {}) {
 
 async function checkHealth() {
   try {
-    state.health = await fetch('/api/health').then(r=>r.json());
+    state.health = await fetch('${API}/health').then(r=>r.json());
     const mode = [state.health?.dataMode, state.health?.schemaMode, state.health?.paymentMode].filter(Boolean).join(' · ');
     qs('api-pill').textContent = mode ? `API aktivan · ${mode}` : 'API aktivan';
     qs('api-pill').className = 'api-pill ok';
@@ -233,7 +233,7 @@ function ensureSocket() {
 }
 
 async function loadOverview() { state.overview = await api('/analytics/overview'); }
-async function loadMeta() { state.meta = await fetch('/api/meta/config').then(r=>r.json()).catch(()=>null); }
+async function loadMeta() { state.meta = await fetch('${API}/meta/config').then(r=>r.json()).catch(()=>null); }
 async function loadProviders() {
   setLoading('providers', true);
   try {
